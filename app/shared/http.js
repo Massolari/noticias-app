@@ -1,5 +1,5 @@
 const headers = new Headers({
-    'Authorization': 'Bearer f174c95242974ca49e0735c844422f61'
+    'Authorization': 'Bearer 9c0bf910a2b34a3c9d55393bfd3047fc'
 });
 
 const baseUrl = 'https://newsapi.org/v2';
