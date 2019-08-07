@@ -9,17 +9,17 @@
             <ScrollView row="1" class="sidedrawer-content">
                 <StackLayout>
                     <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Home' ? ' selected': '')" @tap="onNavigationItemTap(Home)">
-                        <Label col="0" text.decode="&#xf015;" class="fa"></Label>
+                        <Label col="0" text.decode="&#xf1ea;" class="fa"></Label>
                         <Label col="1" text="Destaques" class="p-r-10"></Label>
                     </GridLayout>
 
                     <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Jogos' ? ' selected': '')" @tap="onNavigationItemTap(Jogos)">
-                        <Label col="0" text.decode="&#xf1ea;" class="fa"></Label>
+                        <Label col="0" text.decode="&#xf11b;" class="fa"></Label>
                         <Label col="1" text="Jogos" class="p-r-10"></Label>
                     </GridLayout>
 
                     <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Filmes' ? ' selected': '')" @tap="onNavigationItemTap(Filmes)">
-                        <Label col="0" text.decode="&#xf002;" class="fa"></Label>
+                        <Label col="0" text.decode="&#xf03d;" class="fa"></Label>
                         <Label col="1" text="Filmes" class="p-r-10"></Label>
                     </GridLayout>
 

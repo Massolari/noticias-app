@@ -13,7 +13,8 @@
 
 <script>
 import { openUrl } from 'tns-core-modules/utils/utils';
-// import { openAdvancedUrl } from 'nativescript-advanced-webview';
+import app from 'application';
+import NoticiaTela from './NoticiaTela.vue';
 
 export default {
     props: ['noticias'],
@@ -22,29 +23,16 @@ export default {
             if (!url) {
                 throw new Error("URL não recebida no método 'ler'");
             }
-                    openUrl(url);
-            // InAppBrowser.isAvailable().then(available => {
-            //     if (!available) {
-            //         openUrl(url);
-            //         return;
-            //     }
-            //     InAppBrowser.open(url, {
-            //         showTitle: true,
-            //         toolbarColor: '#6200EE',
-            //         secondaryToolbarColor: 'black',
-            //         enableUrlBarHiding: true,
-            //         enableDefaultShare: true,
-            //         forceCloseOnRedirection: false,
-            //         // Specify full animation resource identifier(package:anim/name)
-            //         // or only resource name(in case of animation bundled with app).
-            //         animations: {
-            //             startEnter: 'slide_in_right',
-            //             startExit: 'slide_out_left',
-            //             endEnter: 'slide_in_left',
-            //             endExit: 'slide_out_right'
-            //         }
-            //     });
-            // })
+            this.$navigateTo(NoticiaTela, {
+                props: {
+                    noticia: url
+                }
+            });
+            // var builder = new android.support.customtabs.CustomTabsIntent.Builder();
+            // builder.setShowTitle(true);
+            // const customTabsIntent = builder.build();
+            // customTabsIntent.launchUrl(app.android.startActivity, android.net.Uri.parse(url));
+            // openUrl(url);
         }
     }
 }
