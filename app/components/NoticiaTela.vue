@@ -15,34 +15,67 @@
                 android:visibility="collapsed"
                 @tap="voltar"
                 ios.position="left">
-                <Label class="fa" text.decode="&#xf060;"></Label>
+                <Label class="fa" text.decode="&#xf060;" />
             </ActionItem>
-            <Label class="action-bar-title" :text="noticia"></Label>
-        </ActionBar>
-        <ScrollView>
             <StackLayout>
-                <ActivityIndicator v-if="carregando" :busy="carregando" class="activity-indicator" />
-                <WebView v-show="!carregando"  @loadFinished="carregou" :src="noticia" />
+                <Label class="titulo" :text="titulo" />
+                <Label class="url" :text="url" />
             </StackLayout>
-        </ScrollView>
+            <ActionItem @tap="compartilhar" android.position="right" icon="res://baseline_share_white_24" />
+        </ActionBar>
+        <GridLayout rows="*">
+            <ActivityIndicator row="0" v-if="carregando"  :busy="carregando" class="activity-indicator" />
+            <StackLayout row="0" v-show="!carregando" >
+                <WebView @loadStarted="carregar"  @loadFinished="carregou" :src="url" />
+            </StackLayout>
+        </GridLayout>
     </Page>
 </template>
 
 <script>
+import { shareUrl } from 'nativescript-social-share'
+
 export default {
-    props: ['noticia'],
+    props: {
+        titulo: {
+            type: String,
+            required: true
+        },
+        url: {
+            type: String,
+            required: true
+        },
+    },
     data() {
         return {
-            carregando: true
+            carregando: false
         }
     },
     methods: {
         voltar() {
             this.$navigateBack()
         },
+        compartilhar() {
+            shareUrl(this.url, this.titulo, 'Compartilhar noticia via');
+        },
+        carregar() {
+            console.log('Começou a carregar!');
+            this.carregando = true;
+        },
         carregou() {
+            console.log('Terminou de carregar!');
             this.carregando = false;
         }
     }
 }
 </script>
+
+<style scoped>
+    .titulo {
+        font-size: 18;
+        font-weight: bold;
+    }
+    .url {
+        font-size: 14;
+    }
+</style>

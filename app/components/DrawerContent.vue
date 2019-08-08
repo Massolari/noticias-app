@@ -23,9 +23,9 @@
                         <Label col="1" text="Filmes" class="p-r-10"></Label>
                     </GridLayout>
 
-                    <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Featured' ? ' selected': '')" @tap="onNavigationItemTap(Featured)">
-                        <Label col="0" text.decode="&#xf005;" class="fa"></Label>
-                        <Label col="1" text="Featured" class="p-r-10"></Label>
+                    <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Tecnologia' ? ' selected': '')" @tap="onNavigationItemTap(Tecnologia)">
+                        <Label col="0" text.decode="&#xf109;" class="fa"></Label>
+                        <Label col="1" text="Tecnologia" class="p-r-10"></Label>
                     </GridLayout>
 
                     <StackLayout class="hr-light"></StackLayout>
@@ -44,6 +44,7 @@
     import Jogos from "./Jogos";
     import Featured from "./Featured";
     import Filmes from "./Filmes";
+    import Tecnologia from "./Tecnologia";
     import Settings from "./Settings";
     import * as utils from "~/shared/utils";
     import SelectedPageService from "~/shared/selected-page-service";
@@ -59,6 +60,7 @@
                 Jogos: Jogos,
                 Featured: Featured,
                 Filmes: Filmes,
+                Tecnologia: Tecnologia,
                 Settings: Settings,
                 selectedPage: ""
             };
@@ -68,6 +70,7 @@
             Jogos,
             Featured,
             Filmes,
+            Tecnologia,
             Settings
         },
         methods: {

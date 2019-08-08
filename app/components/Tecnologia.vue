@@ -16,34 +16,50 @@
                 @tap="onDrawerButtonTap"
                 ios.position="left">
             </ActionItem>
-            <Label class="action-bar-title" text="Destaques"></Label>
+            <Label class="action-bar-title" text="Tecnologia"></Label>
         </ActionBar>
 
-        <NoticiasLista :tipo="tipo" />
+        <ActivityIndicator :busy="carregando" class="activity-indicator" />
+        <PullToRefresh v-if="!carregando" @refresh="getNews">
+            <NoticiasCards :noticias="noticias" />
+        </PullToRefresh>
     </Page>
 </template>
 
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import NoticiasLista from './NoticiasLista.vue'
+    import { getTecnologia } from '../shared/http.js'
+    import NoticiasCards from './NoticiasCards.vue'
 
     export default {
         mounted() {
-            SelectedPageService.getInstance().updateSelectedPage("Home");
+            SelectedPageService.getInstance().updateSelectedPage("Tecnologia");
+            this.getNews();
         },
         data() {
             return {
-                tipo: 'destaques',
+                noticias: [],
+                carregando: true
             }
         },
         methods: {
+            getNews(args) {
+                getTecnologia().then(response => {
+                    this.noticias = response.articles
+                    this.carregando = false
+                    if (args) {
+                        const pullRefresh = args.object;
+                        pullRefresh.refreshing = false;
+                    }
+                });
+            },
             onDrawerButtonTap() {
                 utils.showDrawer();
             }
         },
         components: {
-            NoticiasLista
+            NoticiasCards
         }
     };
 </script>
