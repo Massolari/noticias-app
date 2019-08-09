@@ -19,47 +19,31 @@
             <Label class="action-bar-title" text="Filmes"></Label>
         </ActionBar>
 
-        <ActivityIndicator :busy="carregando" class="activity-indicator" />
-        <PullToRefresh v-if="!carregando" @refresh="getNews">
-            <NoticiasCards :noticias="noticias" />
-        </PullToRefresh>
+        <NoticiasLista :tipo="tipo" />
     </Page>
 </template>
 
 <script>
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
-    import { getFilmes } from '../shared/http.js'
-    import NoticiasCards from './NoticiasCards.vue'
+    import NoticiasLista from './NoticiasLista.vue'
 
     export default {
         mounted() {
             SelectedPageService.getInstance().updateSelectedPage("Filmes");
-            this.getNews();
         },
         data() {
             return {
-                noticias: [],
-                carregando: true
+                tipo: "filmes"
             }
         },
         methods: {
-            getNews(args) {
-                getFilmes().then(response => {
-                    this.noticias = response.articles
-                    this.carregando = false
-                    if (args) {
-                        const pullRefresh = args.object;
-                        pullRefresh.refreshing = false;
-                    }
-                });
-            },
             onDrawerButtonTap() {
                 utils.showDrawer();
             }
         },
         components: {
-            NoticiasCards
+            NoticiasLista
         }
     };
 </script>

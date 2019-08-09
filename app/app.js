@@ -3,13 +3,14 @@ import App from "./components/App";
 import Home from "./components/Home";
 import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
+import RadListView from "nativescript-ui-listview/vue";
 // const AdvancedWebView = require('nativescript-advanced-webview');
 
 Vue.use(RadSideDrawer);
 
-Vue.registerElement('CardView', () => require('@nstudio/nativescript-cardview').CardView);
+Vue.use(RadListView);
 
-Vue.registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
+Vue.registerElement('CardView', () => require('@nstudio/nativescript-cardview').CardView);
 
 // AdvancedWebView.init();
 

@@ -16,10 +16,19 @@
                 @tap="onDrawerButtonTap"
                 ios.position="left">
             </ActionItem>
-            <Label class="action-bar-title" text="Destaques"></Label>
+            <!-- <GridLayout columns="auto, auto"> -->
+                <GridLayout column="0" columns="auto">
+                    <Label column="0" :visibility="mostrarLabel" class="action-bar-title" text="Destaques" />
+                    <SearchBar ref="barraPesquisa" column="0" :visibility="mostrarBarraPesquisa" color="black" backgroundColor="white" hint="Digite a notícia ou assunto que deseja pesquisar" @submit="pesquisar" v-model="pesquisa" />
+                </GridLayout>
+                <!-- <GridLayout column="1" columns="auto"> -->
+                    <ActionItem column="0" :visibility="mostrarLabel" @tap="iniciarPesquisa" android.position="right" icon="res://baseline_search_white_24" />
+                    <ActionItem column="0" :visibility="mostrarBarraPesquisa" @tap="cancelarPesquisa" android.position="right" icon="res://baseline_close_white_24" />
+                </GridLayout>
+            <!-- </GridLayout> -->
         </ActionBar>
 
-        <NoticiasLista :tipo="tipo" />
+        <NoticiasLista ref="lista" :tipo="tipo" />
     </Page>
 </template>
 
@@ -27,6 +36,8 @@
     import * as utils from "~/shared/utils";
     import SelectedPageService from "../shared/selected-page-service";
     import NoticiasLista from './NoticiasLista.vue'
+    import Vue from "nativescript-vue";
+    import { ad } from 'tns-core-modules/utils/utils'
 
     export default {
         mounted() {
@@ -35,11 +46,43 @@
         data() {
             return {
                 tipo: 'destaques',
+                pesquisando: false,
+                pesquisa: '',
+                pesquisou: false
             }
         },
         methods: {
+            iniciarPesquisa() {
+                this.pesquisando = true
+                // TODO Mostrar teclado
+                // Vue.nextTick(() => {
+                //     this.$refs.barraPesquisa.nativeView.focus()
+                //     const imm = ad.getInputMethodManager();
+                //     imm.showSoftInput(this.$refs.barraPesquisa.nativeView.android, 0);
+                // })
+            },
+            cancelarPesquisa() {
+                this.pesquisando = false
+                if (this.pesquisou) {
+                    this.$refs.lista.getNews()
+                    this.pesquisou = false
+                }
+                this.pesquisa = ""
+            },
+            pesquisar() {
+                this.pesquisou = true;
+                this.$refs.lista.pesquisar(this.pesquisa)
+            },
             onDrawerButtonTap() {
                 utils.showDrawer();
+            }
+        },
+        computed: {
+            mostrarBarraPesquisa() {
+                return (this.pesquisando) ? 'visible' : 'collapse'
+            },
+            mostrarLabel() {
+                return (!this.pesquisando) ? 'visible' : 'collapse'
             }
         },
         components: {

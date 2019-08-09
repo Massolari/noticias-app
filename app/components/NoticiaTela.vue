@@ -56,7 +56,7 @@ export default {
             this.$navigateBack()
         },
         compartilhar() {
-            shareUrl(this.url, this.titulo, 'Compartilhar noticia via');
+            shareUrl(this.url, this.titulo, 'Compartilhar notícia via');
         },
         carregar() {
             console.log('Começou a carregar!');
