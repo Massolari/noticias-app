@@ -30,6 +30,16 @@
 
                     <StackLayout class="hr-light"></StackLayout>
 
+                    <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Salvas' ? ' selected': '')" @tap="onNavigationItemTap(Salvas)">
+                        <Label col="0" text.decode="&#xf02e;" class="fa"></Label>
+                        <Label col="1" text="Notícias salvas" class="p-r-10"></Label>
+                    </GridLayout>
+
+                    <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Historico' ? ' selected': '')" @tap="onNavigationItemTap(Historico)">
+                        <Label col="0" text.decode="&#xf1da;" class="fa"></Label>
+                        <Label col="1" text="Histórico" class="p-r-10"></Label>
+                    </GridLayout>
+
                     <GridLayout columns="auto, *" :class="'sidedrawer-list-item' + (selectedPage === 'Settings' ? ' selected': '')" @tap="onNavigationItemTap(Settings)">
                         <Label col="0" text.decode="&#xf013;" class="fa"></Label>
                         <Label col="1" text="Settings" class="p-r-10"></Label>
@@ -45,6 +55,8 @@
     import Featured from "./Featured";
     import Filmes from "./Filmes";
     import Tecnologia from "./Tecnologia";
+    import Historico from "./Historico";
+    import Salvas from "./Salvas";
     import Settings from "./Settings";
     import * as utils from "~/shared/utils";
     import SelectedPageService from "~/shared/selected-page-service";
@@ -61,6 +73,8 @@
                 Featured: Featured,
                 Filmes: Filmes,
                 Tecnologia: Tecnologia,
+                Historico: Historico,
+                Salvas: Salvas,
                 Settings: Settings,
                 selectedPage: ""
             };
@@ -71,6 +85,8 @@
             Featured,
             Filmes,
             Tecnologia,
+            Historico,
+            Salvas,
             Settings
         },
         methods: {

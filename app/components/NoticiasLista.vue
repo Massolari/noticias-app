@@ -19,7 +19,6 @@ export default {
         return {
             noticias: new ObservableArray([]),
             carregando: true,
-            carregandoMais: false,
             pagina: 1,
             totalNoticias: 0
         }
@@ -35,7 +34,6 @@ export default {
             });
         },
         getPromiseNews(pagina = 1) {
-            this.carregando = true
             switch(this.tipo) {
                 case 'destaques':
                     return getTop(pagina)
@@ -54,7 +52,7 @@ export default {
             this.getNews().then(() => object.notifyPullToRefreshFinished())
         },
         carregarMais(object) {
-            this.carregandoMais = true;
+            console.log(`Carregando mais | Página ${this.pagina}`);
             this.getPromiseNews(++this.pagina).then(({ articles }) => {
                 this.noticias.push(...articles);
                 object.notifyLoadOnDemandFinished();
