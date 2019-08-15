@@ -3,7 +3,7 @@
 // Uncomment to add recyclerview-v7 dependency
 dependencies {
 //	implementation 'com.android.support:recyclerview-v7:+'
-    compile 'com.android.support:customtabs:23.2.1'
+    compile 'com.android.support:customtabs:23.3.0'
 }
 
 // If you want to add something to be applied before applying plugins' include.gradle files

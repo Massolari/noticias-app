@@ -38,6 +38,8 @@ import { saveHistory, saveNews, getSavedUrlNews, deleteSaved } from '../shared/s
 import { padNumberTwoZeros } from '~/shared/utils'
 import { shareUrl } from 'nativescript-social-share'
 import * as Toast from 'nativescript-toast';
+import { openAdvancedUrl } from 'nativescript-advanced-webview';
+
 
 export default {
     props: ['noticias', 'acabou', 'nopull'],
@@ -68,15 +70,10 @@ export default {
                 publishedAt,
                 urlToImage
             });
-            this.$navigateTo(NoticiaTela, {
-                props: {
-                    url,
-                    titulo: title,
-                },
-                transition: {
-                    name: 'slide',
-                    curve: 'ease'
-                }
+            openAdvancedUrl({
+                url,
+                toolbarColor: '#3A53FF',
+                showTitle: true // Android only
             });
         },
         refresh({ object }) {

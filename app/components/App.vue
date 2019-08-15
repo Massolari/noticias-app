@@ -11,7 +11,9 @@
 
 <script>
     import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
-    
+    import { init } from 'nativescript-advanced-webview';
+    init();
+
     export default {
         data () {
           return {

@@ -4,7 +4,6 @@ import Home from "./components/Home";
 import DrawerContent from "./components/DrawerContent";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
 import RadListView from "nativescript-ui-listview/vue";
-// const AdvancedWebView = require('nativescript-advanced-webview');
 
 Vue.use(RadSideDrawer);
 

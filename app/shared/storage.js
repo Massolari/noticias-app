@@ -38,11 +38,11 @@ const setHistory = news => set("historico", news);
 
 export const saveHistory = news => {
     const history = getHistory();
-    const newsAlreadyExists = history.findIndex(n => n.url === news.url);
-    if (newsAlreadyExists > -1) {
-        return;
+    const newsIndex = history.findIndex(n => n.url === news.url);
+    if (newsIndex > -1) {
+        history.splice(newsIndex, 1);
     }
-    setHistory(getHistory().concat([news]).sort(sortByDate));
+    setHistory([news].concat(history));
 };
 
 export const deleteHistory = url => setHistory(getHistory().filter(n => n.url !== url));

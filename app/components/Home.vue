@@ -37,7 +37,6 @@
     import SelectedPageService from "../shared/selected-page-service";
     import NoticiasLista from './NoticiasLista.vue'
     import Vue from "nativescript-vue";
-    import { ad } from 'tns-core-modules/utils/utils'
 
     export default {
         mounted() {
@@ -54,12 +53,6 @@
         methods: {
             iniciarPesquisa() {
                 this.pesquisando = true
-                // TODO Mostrar teclado
-                // Vue.nextTick(() => {
-                //     this.$refs.barraPesquisa.nativeView.focus()
-                //     const imm = ad.getInputMethodManager();
-                //     imm.showSoftInput(this.$refs.barraPesquisa.nativeView.android, 0);
-                // })
             },
             cancelarPesquisa() {
                 this.pesquisando = false

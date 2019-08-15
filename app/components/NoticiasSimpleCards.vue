@@ -25,6 +25,7 @@ import NoticiaTela from './NoticiaTela.vue';
 import { saveHistory, saveNews, getSavedUrlNews, deleteSaved } from '../shared/storage.js'
 import { padNumberTwoZeros } from '~/shared/utils'
 import { shareUrl } from 'nativescript-social-share'
+import { openAdvancedUrl } from 'nativescript-advanced-webview';
 
 export default {
     props: ['noticias'],
@@ -44,15 +45,10 @@ export default {
                 publishedAt,
                 urlToImage
             });
-            this.$navigateTo(NoticiaTela, {
-                props: {
-                    url,
-                    titulo: title,
-                },
-                transition: {
-                    name: 'slide',
-                    curve: 'ease'
-                }
+            openAdvancedUrl({
+                url,
+                toolbarColor: '#3A53FF',
+                showTitle: true // Android only
             });
         },
         deletar(url) {
