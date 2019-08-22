@@ -12,9 +12,19 @@
 <script>
     import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
     import { init } from 'nativescript-advanced-webview';
+    const app = require('application');
+    const platform = require('platform');
+    const color = require('color');
     init();
 
     export default {
+        mounted() {
+            if (app.android && platform.device.sdkVersion >= '21') {
+                console.log("Entrou aqui no if da statusBar");
+                const window = app.android.startActivity.getWindow();
+                window.setStatusBarColor(new color.Color("#2d3ca6").android);
+            }
+        },
         data () {
           return {
             transition: new SlideInOnTopTransition()

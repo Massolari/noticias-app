@@ -48,6 +48,7 @@ export default {
             openAdvancedUrl({
                 url,
                 toolbarColor: '#3A53FF',
+                toolbarControlsColor: '#3A53FF', // iOS only
                 showTitle: true // Android only
             });
         },
